@@ -485,20 +485,6 @@
       sections: [
         {
           id: 1,
-          name: '算心应用',
-          description: '活动用心、耗时计算',
-          key: 'event-expense',
-          links: [
-            { name: '传统活动', href: '/llactivity' },
-            { name: 'Score Match', href: '/llsm' },
-            { name: 'Medley Festival', href: '/llmf' },
-            { name: 'Challenge Festival', href: '/llcf' },
-            { name: '散步拉力赛', href: '/llrally' },
-            { name: '协力活动', href: '/llnm' }
-          ]
-        },
-        {
-          id: 2,
           name: '数据查询',
           description: '',
           key: 'game-data',
@@ -512,7 +498,7 @@
          ]
         },
         {
-          id: 3,
+          id: 2,
           name: '队伍编成和强度',
           description: '',
           key: 'unit-formation',
@@ -526,7 +512,7 @@
         ]
         },
         {
-          id: 4,
+          id: 3,
           name: '其他工具',
           description: '',
           key: 'other-tools',
@@ -536,7 +522,7 @@
          ]
         },
         {
-          id: 5,
+          id: 4,
           name: '文档攻略',
           description: '',
           key: 'docs',
@@ -558,11 +544,10 @@
       },
       routeToHash: function (hash) {
         switch (hash) {
-          case '#event-expense': this.activeSectionId = 1; break
-          case '#game-data': this.activeSectionId = 2; break
-          case '#unit-formation': this.activeSectionId = 3; break
-          case '#other-tools': this.activeSectionId = 4; break
-          case '#docs': this.activeSectionId = 5; break
+          case '#game-data': this.activeSectionId = 1; break
+          case '#unit-formation': this.activeSectionId = 2; break
+          case '#other-tools': this.activeSectionId = 3; break
+          case '#docs': this.activeSectionId = 4; break
         }
       }
     },

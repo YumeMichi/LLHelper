@@ -14,8 +14,8 @@ else:
     from urllib.request import urlopen
     import queue as Queue
 
-LLSIF_WIN_API_DOMAIN = 'http://a.llsif.win/'
-LLSIF_WIN_API_ENDPOINT = 'live/json/'
+LLSIF_WIN_API_DOMAIN = 'http://localhost:8081/'
+# LLSIF_WIN_API_ENDPOINT = 'live/json/'
 LIVE_MAP_LOCAL_CACHE_DIR = 'static/live/json/'
 
 NOTE_TYPE_RANDOM = 0
@@ -141,21 +141,22 @@ class LiveMap:
         liveData['swingslider'] = str(self.swingSliderCount)
         liveData['time'] = str(self.endTime)
 
-def getLiveMapJsonUrl(liveId):
-    if liveId > 1500:
-        raise Exception('llsif no longer updating new live maps')
-    else:
-        return LLSIF_WIN_API_DOMAIN + LLSIF_WIN_API_ENDPOINT + str(liveId)
-def getLiveMapJsonPath(liveId):
-    return LIVE_MAP_LOCAL_CACHE_DIR + str(liveId) + '.json'
+def getLiveMapJsonUrl(liveId, liveJs):
+    # if liveId > 1884:
+    #     raise Exception('llsif no longer updating new live maps')
+    # else:
+        # return LLSIF_WIN_API_DOMAIN + LLSIF_WIN_API_ENDPOINT + str(liveId)
+        return LLSIF_WIN_API_DOMAIN + liveJs
+def getLiveMapJsonPath(liveJs):
+    return LIVE_MAP_LOCAL_CACHE_DIR + liveJs
 
-def getLiveMap(liveId):
-    liveJsonPath = getLiveMapJsonPath(liveId)
+def getLiveMap(liveId, liveJs):
+    liveJsonPath = getLiveMapJsonPath(liveJs)
     if os.path.isfile(liveJsonPath):
         with open(liveJsonPath, 'r') as f:
             liveJson = json.load(f)
     else:
-        liveJsonUrl = getLiveMapJsonUrl(liveId)
+        liveJsonUrl = getLiveMapJsonUrl(liveId, liveJs)
         # timeout for 10 seconds
         liveJsonFp = urlopen(liveJsonUrl, None, 10)
         liveJson = json.load(liveJsonFp)
@@ -202,8 +203,9 @@ class positionWeightUpdateThread (threading.Thread):
                 break
     def processLive(self, live):
         liveId = int(live['liveid'])
+        liveJs = live['jsonpath']
         try:
-            result = getLiveMap(liveId)
+            result = getLiveMap(liveId, liveJs)
             self.printer.myPrint('* Successfully processed %d' % (liveId))
             return (liveId, STATUS_SUCCESSFUL, result)
         except KeyboardInterrupt:
@@ -262,8 +264,9 @@ def main(threadCount):
         while not liveQueue.empty():
             live = liveQueue.get()
             liveId = int(live['liveid'])
+            liveJs = live['jsonpath']
             try:
-                liveMap = getLiveMap(liveId)
+                liveMap = getLiveMap(liveId, liveJs)
                 liveMap.updateLiveData(live)
                 updatedLives.append(liveId)
                 printer.myPrint('* Successfully processed %d' % (liveId))
