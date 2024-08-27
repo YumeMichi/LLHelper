@@ -617,7 +617,7 @@ var LLMapNoteData = (function () {
    }
    function handleLocalServerCache(me, jsonPath, liveId, defer) {
       $.ajax({
-         'url': '/static/live/json/' + liveId + '.json',
+         'url': '/static/livejson/' + jsonPath,
          'type': 'GET',
          'success': function (data) {
             me.cache[jsonPath] = data;
@@ -658,28 +658,7 @@ var LLMapNoteData = (function () {
       var jsonPath = songSetting.jsonpath;
       var liveId = songSetting.liveid;
       var me = this;
-      if (handleLocalCache(me, jsonPath, liveId, defer)) return defer;
-      var url = me.baseUrl + jsonPath;
-      $.ajax({
-         'url': url ,
-         'type': 'GET',
-         'success': function (data) {
-            me.cache[jsonPath] = data;
-            defer.resolve(data);
-         },
-         'error': function (xhr, textStatus, errorThrown) {
-            console.info("Failed on request to " + url + ": " + textStatus + ', retry on local cache');
-            console.info(errorThrown);
-            if (!liveId) {
-               console.error('No live id found for liveSetting id : ' + liveId);
-               console.error(song);
-               defer.reject();
-            } else {
-               handleLocalServerCache(me, jsonPath, liveId, defer);
-            }
-         },
-         'dataType': 'json'
-      });
+      handleLocalServerCache(me, jsonPath, liveId, defer);
       return defer;
    };
    /**
