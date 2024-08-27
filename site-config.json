@@ -1,17 +1,17 @@
 {
-    "version": "20240828000000000016",
+    "version": "20240827",
     "page_version": {
-        "docs": "20240828000000000016",
-        "llcardpool": "20240828000000000016",
-        "llcoverage": "20240828000000000016",
-        "llnewaccessorydata": "20240828000000000016",
-        "llnewsisdata": "20240828000000000016",
-        "llnewcarddata": "20240828000000000016",
-        "llnewautounit": "20240828000000000016",
-        "llnewunit": "20240828000000000016",
-        "llnewunitla": "20240828000000000016",
-        "llnewunitsis": "20240828000000000016",
-        "llsongdata": "20240828000000000016",
-        "test": "20240828000000000016"
+        "docs": "20240827",
+        "llcardpool": "20240827",
+        "llcoverage": "20240827",
+        "llnewaccessorydata": "20240827",
+        "llnewsisdata": "20240827",
+        "llnewcarddata": "20240827",
+        "llnewautounit": "20240827",
+        "llnewunit": "20240827",
+        "llnewunitla": "20240827",
+        "llnewunitsis": "20240827",
+        "llsongdata": "20240827",
+        "test": "20240827"
     }
 }
