@@ -115,9 +115,9 @@ function update_avatar(comp, cardid, mezame, show) {
    });
 }
 
-function update_card_image(comp, cardid, mezame, show, small) {
+function update_card_image(comp, card, mezame, show, small) {
    update_visible(comp, show, function() {
-      comp.setSrcList(LLUnit.getImagePathList(cardid, 'card', mezame));
+      comp.setSrcList(LLUnit.getImagePathList(card, 'card', mezame));
       if (small) {
          comp.element.style.height = '422px';
          comp.element.style.width = '300px';
@@ -128,9 +128,9 @@ function update_card_image(comp, cardid, mezame, show, small) {
    });
 }
 
-function update_navi_image(comp, cardid, mezame, show, small) {
+function update_navi_image(comp, card, mezame, show, small) {
    update_visible(comp, show, function() {
-      comp.setSrcList(LLUnit.getImagePathList(cardid, 'navi', mezame));
+      comp.setSrcList(LLUnit.getImagePathList(card, 'navi', mezame));
       if (small) {
          comp.element.style.height = '300px';
          comp.element.style.width = '300px';
@@ -161,10 +161,10 @@ function changecolor(){
       document.getElementById('notmezame').style.display = (show_not_mezame ? '' : 'none');
       update_avatar(comp_image_avatar, index, 0, show_not_mezame);
       update_avatar(comp_image_avatar2, index, 1, true);
-      update_card_image(comp_image_card, index, 0, show_not_mezame && show_card, show_small);
-      update_card_image(comp_image_card2, index, 1, show_card, show_small);
-      update_navi_image(comp_image_navi, index, 0, show_not_mezame && show_card, show_small);
-      update_navi_image(comp_image_navi2, index, 1, show_card, show_small);
+      update_card_image(comp_image_card, curCard, 0, show_not_mezame && show_card, show_small);
+      update_card_image(comp_image_card2, curCard, 1, show_card, show_small);
+      update_navi_image(comp_image_navi, curCard, 0, show_not_mezame && show_card, show_small);
+      update_navi_image(comp_image_navi2, curCard, 1, show_card, show_small);
       update_visible('skill2', !show_not_mezame);
       update_visible('skillslot2', !show_not_mezame);
       update_visible('centerskill2', !show_not_mezame);

@@ -1096,10 +1096,11 @@ var LLAvatarComponent = (function () {
        */
       setCard(cardId, mezame) {
          var newMezame = (mezame ? true : false);
+         var aType = (newMezame ? 'iconRankup' : 'icon')
          if (this.cardId != cardId || this.mezame != newMezame) {
             this.cardId = cardId;
             this.mezame = newMezame;
-            this.setSrcList(LLUnit.getImagePathList(cardId, 'avatar', newMezame));
+            this.setSrcList(['https://card.niconi.co.ni/' + aType + '/' + cardId + '.png']);
             if (cardId) {
                this.setAltText(LLConst.Common.getCardDescription((LLCardData.getAllCachedBriefData() || {})[cardId] || {'id': cardId}, LLConstValue.LANGUAGE_CN, newMezame));
             } else {
@@ -1107,7 +1108,7 @@ var LLAvatarComponent = (function () {
             }
             var me = this;
             LLImageServerSwitch.registerCallback(this, function () {
-               me.setSrcList(LLUnit.getImagePathList(cardId, 'avatar', newMezame));
+               me.setSrcList(['https://card.niconi.co.ni/' + aType + '/' + cardId + '.png']);
             });
          }
       }
@@ -3291,36 +3292,22 @@ var LLUnit = {
     * @param {boolean} mezame 
     * @returns {string[]}
     */
-   getImagePathList: function (cardid, type, mezame) {
+   getImagePathList: function (card, type, mezame) {
+      var cardid = card.id;
       if ((!cardid) || cardid == "0") {
          if (type == 'avatar') return ['/static/null.png'];
          return [''];
       }
       var ret = [];
-      var isHttp = ('http:' == document.location.protocol);
-      var curServer = LLImageServerSwitch.getImageServer();
-      if (type == 'avatar' || type == 'card') {
-         var f = (type == 'avatar' ? 'icon' : 'unit');
-         var m = (mezame ? 'rankup' : 'normal');
-         if (type == 'avatar') {
-            ret.push('/static/avatar/' + m + '/' + cardid + '.png');
-         }
-         if (!(type == 'avatar' && curServer === LLImageServerSwitch.AVATAR_SERVER_LOCAL)) {
-            if (isHttp) {
-               for (var i = 0; i < 4; i++) {
-                  ret.push(((i>=2) ? 'https' : 'http') + '://gitcdn.' + (i%2==0 ? 'xyz' : 'link') + '/repo/iebb/SIFStatic/master/' + f + '/' + m + '/' + cardid + '.png');
-               }
-            } else {
-               for (var i = 0; i < 2; i++) {
-                  ret.push('https://gitcdn.' + (i%2==0 ? 'xyz' : 'link') + '/repo/iebb/SIFStatic/master/' + f + '/' + m + '/' + cardid + '.png');
-               }
-            }
-         }
+      var aType = (mezame ? 'iconRankup' : 'icon')
+      var cType = (mezame ? card.rank_max_card_id : card.normal_card_id);
+      var nType = (mezame ? card.rank_max_navi_asset : card.normal_navi_asset);
+      if (type == 'avatar') {
+         ret.push('https://card.niconi.co.ni/' + aType + '/' + cardid + '.png');
+      } else if (type == 'card') {
+         ret.push('https://card.niconi.co.ni/card/v4/' + cType + '.png');
       } else if (type == 'navi') {
-         var m = (mezame ? '1' : '0');
-         for (var i = 0; i < 2; i++) {
-            ret.push((isHttp !== (i>=1) ? 'http' : 'https') + '://db.loveliv.es/png/navi/' + cardid + '/' + m);
-         }
+         ret.push('https://card.niconi.co.ni/asset/' + nType + '?gettexb');
       } else {
          ret.push('');
       }
@@ -11165,7 +11152,7 @@ var LLAccessoryComponent = (function () {
             newClassName = newClassName + ' accessory-special';
          }
          this.setClassName(newClassName);
-         this.accessoryImage.setSrcList(['/static/accessory/' + accessory.id + '.png']);
+         this.accessoryImage.setSrcList(['/static/accessory/' + accessory.icon_asset.replace('assets/image/accessory/icon/', '')]);
          this.accessoryId = accessory.id;
       }
    }

@@ -13,13 +13,13 @@ app.secret_key = "hatsune miku"
 
 # file check interval: 60 seconds (only check when a request comes in and have not checked for 1 minute)
 # auto reload the data during file check when file last modify time is changed
-g_llcarddata = LLData('newcardsjson.txt', 60)
-g_llsongdata = LLData('newsongsjson.txt', 60)
+g_llcarddata = LLData('llnewcardsdata.json', 60)
+g_llsongdata = LLData('newsongsjson.json', 60)
 # snapshot for older card data, should have much less chance to update
-g_llcarddata_cn = LLData('newcardsjson-20181021.txt', 3600)
+g_llcarddata_cn = LLData('newcardsjson-20181021.json', 3600)
 g_llcarddata_mix = LLDataMix([g_llcarddata_cn, g_llcarddata], 'cn-mix', 60)
 # metadata
-g_llmetadata = LLData('metadata.txt', 60)
+g_llmetadata = LLData('metadata.json', 60)
 # sisdata
 g_llsisdata = LLData('sisdata.json', 60)
 # accessorydata
@@ -100,9 +100,9 @@ def llnewcarddata():
 @app.route("/llurcardrank")
 def llurcardrank():
     if sys.version[0] == '2':
-        cardsjson = open('newcardsjson.txt', 'rb').read()
+        cardsjson = open('llnewcardsdata.json', 'rb').read()
     else:
-        cardsjson = open('newcardsjson.txt', 'r', encoding='utf-8').read()
+        cardsjson = open('llnewcardsdata.json', 'r', encoding='utf-8').read()
     return render_template('llurcardrank.html', cardsjson = cardsjson)
 
 @app.route('/llnewsisdata')

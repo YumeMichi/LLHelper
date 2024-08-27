@@ -118,6 +118,11 @@ declare namespace LLH {
 
             triggertarget?: Core.TriggerTargetType; // chain target
             effecttarget?: Core.TriggerTargetType; // attribute up target
+
+            normalcardid?: number;
+            rankmaxcardid?: number;
+            normalnaviasset?: string;
+            rankmaxnaviasset?: string;
         }
         type CardDictDataType = {[id: Core.CardIdStringType]: CardDataType};
 
@@ -1351,18 +1356,18 @@ declare namespace LLH {
             getLocalMapNoteData(song: API.SongDataType, songSetting: API.SongSettingDataType): Depends.Promise<API.NoteDataType[], void>;
         }
 
-        type ImageServerIdType = number;
-        type ImageServerChangeCallback = () => void;
-        interface LLImageServerSwitch_Servers {
-            AVATAR_SERVER_GIT: ImageServerIdType;
-            AVATAR_SERVER_LOCAL: ImageServerIdType;
-        }
-        interface LLImageServerSwitch extends LLImageServerSwitch_Servers {
-            getImageServer(): ImageServerIdType;
-            changeImageServer(): void;
-            registerCallback(key: string | Component.LLComponentBase, callback: ImageServerChangeCallback): void;
-            initImageServerSwitch(id: Component.HTMLElementOrId): void;
-        }
+        // type ImageServerIdType = number;
+        // type ImageServerChangeCallback = () => void;
+        // interface LLImageServerSwitch_Servers {
+        //     AVATAR_SERVER_GIT: ImageServerIdType;
+        //     AVATAR_SERVER_LOCAL: ImageServerIdType;
+        // }
+        // interface LLImageServerSwitch extends LLImageServerSwitch_Servers {
+        //     getImageServer(): ImageServerIdType;
+        //     changeImageServer(): void;
+        //     registerCallback(key: string | Component.LLComponentBase, callback: ImageServerChangeCallback): void;
+        //     initImageServerSwitch(id: Component.HTMLElementOrId): void;
+        // }
 
         interface Swappable<T> {
             startSwapping(): T;
