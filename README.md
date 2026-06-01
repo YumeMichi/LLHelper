@@ -12,7 +12,7 @@ pip install -r requirements.txt
 
 shell:
 ```sh
-FLASK_APP=app.py FLASK_ENV=development python2 -m flask run
+FLASK_APP=app.py python3 -m flask run --debug
 ```
 or
 ```sh
@@ -28,7 +28,7 @@ powershell:
 
 shell:
 ```sh
-FLASK_APP=app.py FLASK_RUN_PORT={PORT} python2 -m flask run
+FLASK_APP=app.py FLASK_RUN_PORT={PORT} python3 -m flask run
 ```
 or
 ```sh
@@ -45,7 +45,7 @@ or
         "env": {
             "LLHELPER_RUN_PORT": 8080
         },
-        "interperter": "python2",
+        "interpreter": "python3",
         "watch": false,
         "cron_restart": "5 * * * *",
         "cwd": "LLHelper"

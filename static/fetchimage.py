@@ -1,15 +1,5 @@
 # -*- coding: utf-8 -*-
-import json
-import os
-import hashlib
-import sqlite3
-import re
+"""Deprecated helper script kept as a placeholder for Python 3 compatibility."""
 
-
-cards = json.loads(open('../newcardsjson.txt', 'rb').read())
-
-for i in cards:
-	cardid = cards[id]
-	if not os.path.exists('')
-		card = 
-	break
+if __name__ == '__main__':
+    print('static/fetchimage.py is deprecated and intentionally left blank.')

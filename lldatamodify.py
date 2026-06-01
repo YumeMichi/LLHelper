@@ -3,23 +3,23 @@ from app import *
 
 @app.route("/llsongmodify", methods=['GET', 'POST'])
 def llsongmodify():
-    openfile = open('songsjson.txt', 'rb')
+    openfile = open('songsjson.txt', 'r', encoding='utf-8')
     songsjson = openfile.read()
     openfile.close()
     songs = json.loads(songsjson)
-    if request.form.has_key('submit'):
+    if 'submit' in request.form:
         print(request.form)
         if request.form.get('passwd') == 'prpr' or True:
             pre = request.form.get('previoussong')
             if pre == "":
                 pre = -1
             else:
-                pre = string.atoi(pre)
+                pre = int(pre)
             now = request.form.get('songchoice')
             if now == "":
                 now = -1
             else:
-                now = string.atoi(now)
+                now = int(now)
             element = ['name', 'jpname', 'difficulty', 'attribute', 'stardifficulty','oldstardifficulty',  'randomdifficulty','oldrandomdifficulty', 'lp', 'exp',\
                         'combo','weight','slider', 'time','totaltime','bpm','cscore'\
                         ,'bscore','ascore','sscore','star','type','cnhave', 'sm', 'mf'\
@@ -38,10 +38,10 @@ def llsongmodify():
                     del songs[now+1]
                 else:
                     del songs[now]
-            newsongsjson = open('songsjson.txt','wb')
+            newsongsjson = open('songsjson.txt','w', encoding='utf-8')
             newsongsjson.write(json.dumps(songs))
             newsongsjson.close()
-            newsongsjs = open('.\\static\\llsongapi.js','wb')
+            newsongsjs = open('.\\static\\llsongapi.js','w', encoding='utf-8')
             newsongsjs.write('function getsongjson(){return '+songsjson+'}')
             newsongsjs.close()
             return render_template('llsongmodify.html', songsjson = json.dumps(songs)) 
@@ -50,11 +50,11 @@ def llsongmodify():
 
 @app.route("/llcardmodify", methods=['GET', 'POST'])
 def llcardmodify():
-    inputfile = open('newcardsjson.txt', 'rb')
+    inputfile = open('newcardsjson.txt', 'r', encoding='utf-8')
     cardsjson = inputfile.read()
     inputfile.close()
     cards = json.loads(cardsjson)
-    if request.form.has_key('submit'):
+    if 'submit' in request.form:
         print(request.form)
         if request.form.get('passwd') == 'prpr' or True:
             now = request.form.get('cardchoice')
@@ -62,10 +62,10 @@ def llcardmodify():
             for key in element:
                 cards[now][key] = request.form.get(key)
 
-            newcardsjson = open('newcardsjson.txt','wb')
+            newcardsjson = open('newcardsjson.txt','w', encoding='utf-8')
             newcardsjson.write(json.dumps(cards))
             newcardsjson.close()
-            newcardsjs = open('.\\static\\llcardapi.js','wb')
+            newcardsjs = open('.\\static\\llcardapi.js','w', encoding='utf-8')
             newcardsjs.write('function getcardjson(){return '+cardsjson+'}')
             newcardsjs.close()
             return render_template('llcardmodify.html', cardsjson = json.dumps(cards)) 
@@ -74,11 +74,11 @@ def llcardmodify():
 
 @app.route("/llnewsongmodify", methods=['GET', 'POST'])
 def llnewsongmodify():
-    openfile = open('newsongsjson.txt', 'rb')
+    openfile = open('newsongsjson.txt', 'r', encoding='utf-8')
     songsjson = openfile.read()
     openfile.close()
     songs = json.loads(songsjson)
-    if request.form.has_key('submit'):
+    if 'submit' in request.form:
         print(request.form)
         if request.form.get('passwd') == 'prpr' or True:
             now = request.form.get('songchoice')
@@ -94,10 +94,10 @@ def llnewsongmodify():
                 
                 songs[now][diff]['positionweight'][i] = request.form.get('positionweight'+str(i))
 
-            newsongsjson = open('newsongsjson.txt','wb')
+            newsongsjson = open('newsongsjson.txt','w', encoding='utf-8')
             newsongsjson.write(json.dumps(songs))
             newsongsjson.close()
-            newsongsjs = open('.\\static\\llsongapi.js','wb')
+            newsongsjs = open('.\\static\\llsongapi.js','w', encoding='utf-8')
             newsongsjs.write('function getsongjson(){return '+songsjson+'}')
             newsongsjs.close()
             return render_template('llnewsongmodify.html', songsjson = json.dumps(songs)) 

@@ -7,12 +7,8 @@ import ctypes
 from lib.SyncPrinter import SyncPrinter
 from lib.JsonUtil import JsonFile
 
-if sys.version[0] == '2':
-    from urllib2 import urlopen
-    import Queue
-else:
-    from urllib.request import urlopen
-    import queue as Queue
+from urllib.request import urlopen
+import queue as Queue
 
 LLSIF_WIN_API_DOMAIN = 'http://localhost:8081/'
 # LLSIF_WIN_API_ENDPOINT = 'live/json/'
@@ -216,7 +212,7 @@ class positionWeightUpdateThread (threading.Thread):
             self.printer.myPrint(e)
             return (liveId, STATUS_ERROR, None)
     def interrupt(self, e):
-        if not self.isAlive():
+        if not self.is_alive():
             return
         ex = ctypes.py_object(e)
         ret = ctypes.pythonapi.PyThreadState_SetAsyncExc(ctypes.c_long(self.ident), ex)
@@ -310,4 +306,3 @@ if __name__ == '__main__':
     if len(sys.argv) > 1:
         threadCount = int(sys.argv[1])
     main(threadCount)
-

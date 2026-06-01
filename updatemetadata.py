@@ -1,13 +1,8 @@
 # -*- coding: utf-8 -*-
 import argparse
 import sqlite3
-import sys
 from lib.JsonUtil import JsonFile
 from lib.Translator import Translator
-
-if sys.version[0] == '2':
-    reload(sys)
-    sys.setdefaultencoding('utf-8')
 
 translate_cn_file = 'translate-cn.properties'
 translate_missing_file = 'translate-missing.properties'

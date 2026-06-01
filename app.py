@@ -1,12 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import Flask, render_template, request
 import json
-import sys
 from lldata import LLData, LLDataMix
-
-if sys.version[0] == '2':
-    reload(sys)
-    sys.setdefaultencoding('utf-8')
 
 app = Flask(__name__)
 app.secret_key = "hatsune miku"
@@ -27,7 +22,7 @@ g_llaccessorydata = LLData('accessorydata.json', 60)
 
 def loadJsonFile(jsonFile):
     print('Loading %s ...' % jsonFile)
-    with open(jsonFile, 'rb') as f:
+    with open(jsonFile, 'r', encoding='utf-8') as f:
         return json.load(f)
 
 g_site_config = loadJsonFile('site-config.json')
@@ -99,10 +94,7 @@ def llnewcarddata():
 
 @app.route("/llurcardrank")
 def llurcardrank():
-    if sys.version[0] == '2':
-        cardsjson = open('llnewcardsdata.json', 'rb').read()
-    else:
-        cardsjson = open('llnewcardsdata.json', 'r', encoding='utf-8').read()
+    cardsjson = open('llnewcardsdata.json', 'r', encoding='utf-8').read()
     return render_template('llurcardrank.html', cardsjson = cardsjson)
 
 @app.route('/llnewsisdata')
@@ -171,10 +163,7 @@ def llmapapi():
 ### documents ###
 
 def render_document(md_file, doc_title):
-    if sys.version[0] == '2':
-        md_content = open(md_file, 'rb').read()
-    else:
-        md_content = open(md_file, 'r', encoding='utf-8').read()
+    md_content = open(md_file, 'r', encoding='utf-8').read()
     return render_template('docs.html', md_content = md_content, doc_title = doc_title)
 
 @app.route("/document/score_calculation.md", methods=['GET'])
@@ -226,7 +215,8 @@ if app.debug == True:
 
 if __name__ == "__main__":
     import os
-    if os.environ['LLHELPER_RUN_PORT']:
-        app.run(port=int(os.environ['LLHELPER_RUN_PORT']))
+    run_port = os.getenv('LLHELPER_RUN_PORT')
+    if run_port:
+        app.run(port=int(run_port))
     else:
         app.run()

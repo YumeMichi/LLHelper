@@ -19,7 +19,7 @@ class SimpleRWLock:
     def releaseRead(self):
         self.lock.acquire()
         self.reader_count -= 1
-        self.cond.notifyAll()
+        self.cond.notify_all()
         self.lock.release()
 
     def acquireWrite(self):
@@ -34,7 +34,7 @@ class SimpleRWLock:
     def releaseWrite(self):
         self.lock.acquire()
         self.writer_count -= 1
-        self.cond.notifyAll()
+        self.cond.notify_all()
         self.lock.release()
 
 class LLData:
@@ -65,8 +65,8 @@ class LLData:
         filestat = os.stat(self.json_file)
         if filestat.st_mtime != self.last_update_time:
             print('Loading %s ...' % self.json_file)
-            jsonstr = open(self.json_file, 'rb').read()
-            self.data = json.loads(jsonstr)
+            with open(self.json_file, 'r', encoding='utf-8') as fd:
+                self.data = json.load(fd)
             self.last_update_time = filestat.st_mtime
 
     def reloadJson(self):
@@ -150,4 +150,3 @@ class LLDataMix(LLData):
             lldata.mergeDataTo(new_data)
         self.data = new_data
         self.last_update_time = max_update_time
-

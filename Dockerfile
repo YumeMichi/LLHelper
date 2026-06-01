@@ -1,10 +1,10 @@
-FROM python:2.7.17-alpine
+FROM python:3.11-slim
 
 WORKDIR /app
 
 COPY . /app/
 
-RUN python -m pip install -r requirements.txt
+RUN python -m pip install --upgrade pip && python -m pip install -r requirements.txt
 
 EXPOSE 8080
 

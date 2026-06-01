@@ -8,6 +8,18 @@ do_cleanup=
 livedb=livenewjp.db_
 unitdb=unitnewjp.db_
 
+download_file() {
+  local target="$1"
+  local source_url="$2"
+  if command -v wget >/dev/null 2>&1; then
+    wget -O "$target" "$source_url"
+  elif command -v curl >/dev/null 2>&1; then
+    curl -L -o "$target" "$source_url"
+  else
+    python3 -c "import urllib.request; urllib.request.urlretrieve('$source_url', '$target')"
+  fi
+}
+
 if [ "$1" = "local" ]; then
   if [ ! -f "$livedb" ]; then
     do_download_livedb=y
@@ -22,23 +34,22 @@ else
 fi
 
 if [ "$do_download_livedb" = "y" ]; then
-  wget -O $livedb https://r.llsif.win/db/live/live.db_
+  download_file "$livedb" "https://r.llsif.win/db/live/live.db_"
 fi
 if [ "$do_download_unitdb" = "y" ]; then
-  wget -O $unitdb https://r.llsif.win/db/unit/unit.db_
+  download_file "$unitdb" "https://r.llsif.win/db/unit/unit.db_"
 fi
 
-python2 updatenewcard.py
-python2 updatenewlive.py
+python3 updatenewcard.py
+python3 updatenewlive.py
 # argument is thread number, 1 to use single-thread mode
-#python2 updateweight2.py 1
-python2 updateweight2.py 10
-python2 updatemetadata.py
-python2 updatesis.py
-python2 updateaccessory.py
+#python3 updateweight2.py 1
+python3 updateweight2.py 10
+python3 updatemetadata.py
+python3 updatesis.py
+python3 updateaccessory.py
 
 if [ "$do_cleanup" = "y" ]; then
   rm $livedb
   rm $unitdb
 fi
-
