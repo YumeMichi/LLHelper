@@ -19,7 +19,24 @@
       var LLHistoryPage = (function(){
          var update_history = [
             {
-               'version': LLSiteVersion.current_version,
+               'version': 20260601,
+               'features': [
+                  '服务端运行环境迁移至 Python 3.11',
+                  [
+                     '移除 Python 2 兼容分支并统一脚本入口到 Python 3',
+                     '调整启动脚本、更新脚本及 Docker 基础镜像以适配 Python 3.11'
+                  ]
+               ],
+               'enhancements': [
+                  '页面结构收敛：保留首页可达功能，移除未在首页使用的历史页面与对应后端路由'
+               ],
+               'fixes': [
+                  '下线传统活动相关页面（传统活动、获得pt表）',
+                  '下线截图导入队伍页面并移除首页入口'
+               ]
+            },
+            {
+               'version': 20240827,
                'fixes': [
                   '基于GitHub开源的最终版本代码进行上线适配',
                   '切换图片资源至 LLSIF查卡器'

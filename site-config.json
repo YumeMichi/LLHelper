@@ -1,17 +1,16 @@
 {
-    "version": "20240827",
+    "version": "20260601",
     "page_version": {
-        "docs": "20240827",
-        "llcardpool": "20240827",
-        "llcoverage": "20240827",
-        "llnewaccessorydata": "20240827",
-        "llnewsisdata": "20240827",
-        "llnewcarddata": "20240827",
-        "llnewautounit": "20240827",
-        "llnewunit": "20240827",
-        "llnewunitla": "20240827",
-        "llnewunitsis": "20240827",
-        "llsongdata": "20240827",
-        "test": "20240827"
+        "docs": "20260601",
+        "llcardpool": "20260601",
+        "llcoverage": "20260601",
+        "llnewaccessorydata": "20260601",
+        "llnewsisdata": "20260601",
+        "llnewcarddata": "20260601",
+        "llnewautounit": "20260601",
+        "llnewunit": "20260601",
+        "llnewunitla": "20260601",
+        "llnewunitsis": "20260601",
+        "llsongdata": "20260601"
     }
 }
