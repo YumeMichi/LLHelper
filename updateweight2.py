@@ -38,7 +38,7 @@ STATUS_EXIT = 4
 
 NUMBER_OF_THREAD = 20
 
-FILENAME_SONG_LIST_JSON = 'newsongsjson.txt'
+FILENAME_SONG_LIST_JSON = 'newsongsjson.json'
 
 liveDataKeysForNumber = ['time', 'star', 'slider', 'swing', 'swingslider']
 liveDataKeysForPositiveNumber = ['time']

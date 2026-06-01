@@ -94,7 +94,7 @@ def parseArgs():
 if __name__ == "__main__":
     args = parseArgs()
 
-    json_file = JsonFile('metadata.txt')
+    json_file = JsonFile('metadata.json')
     print('Updating metadata json: %s ...' % json_file)
     metadata = json_file.load()
     translator = Translator(translate_cn_file)

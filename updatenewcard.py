@@ -83,7 +83,7 @@ class MinMax:
             return '%s~%s' % (min_str, max_str)
 
 if __name__ == "__main__":
-    json_file = JsonFile('newcardsjson.txt')
+    json_file = JsonFile('newcardsjson.json')
     cards = json_file.load()
     card_count_in_db = 0
     card_count_in_json = len(cards)
@@ -260,5 +260,4 @@ if __name__ == "__main__":
     json_file.save(cards)
 
     print('Updated %s , card count = %d (old %d, new %d, db %d)' % (json_file, len(cards), card_count_in_json, card_count_new, card_count_in_db))
-
 

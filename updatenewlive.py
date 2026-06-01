@@ -8,7 +8,7 @@ import gzip
 
 livejpdbpath = 'livenewjp.db_'
 livecndbpath = 'livecn.db_'
-json_file = 'newsongsjson.txt'
+json_file = 'newsongsjson.json'
 songs = json.loads(open(json_file, 'rb').read())
 livejsonpath = 'livejson/'
 
