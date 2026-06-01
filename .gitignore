@@ -27,6 +27,8 @@ newsongsjson.txt
 .idea
 .DS_Store
 
+nohup.out
+
 # *.db_
 live
 venv
