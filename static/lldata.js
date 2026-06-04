@@ -1079,7 +1079,7 @@ var LLAvatarComponent = (function () {
          if (this.cardId != cardId || this.mezame != newMezame) {
             this.cardId = cardId;
             this.mezame = newMezame;
-            this.setSrcList(['https://card.niconi.co.ni/' + aType + '/' + cardId + '.png']);
+            this.setSrcList(['https://card.ganbaru.by/' + aType + '/' + cardId + '.png']);
             if (cardId) {
                this.setAltText(LLConst.Common.getCardDescription((LLCardData.getAllCachedBriefData() || {})[cardId] || {'id': cardId}, LLConstValue.LANGUAGE_CN, newMezame));
             } else {
@@ -1087,7 +1087,7 @@ var LLAvatarComponent = (function () {
             }
             var me = this;
             LLImageServerSwitch.registerCallback(this, function () {
-               me.setSrcList(['https://card.niconi.co.ni/' + aType + '/' + cardId + '.png']);
+               me.setSrcList(['https://card.ganbaru.by/' + aType + '/' + cardId + '.png']);
             });
          }
       }
@@ -3282,11 +3282,11 @@ var LLUnit = {
       var cType = (mezame ? card.rank_max_card_id : card.normal_card_id);
       var nType = (mezame ? card.rank_max_navi_asset : card.normal_navi_asset);
       if (type == 'avatar') {
-         ret.push('https://card.niconi.co.ni/' + aType + '/' + cardid + '.png');
+         ret.push('https://card.ganbaru.by/' + aType + '/' + cardid + '.png');
       } else if (type == 'card') {
-         ret.push('https://card.niconi.co.ni/card/v4/' + cType + '.png');
+         ret.push('https://card.ganbaru.by/card/v4/' + cType + '.png');
       } else if (type == 'navi') {
-         ret.push('https://card.niconi.co.ni/asset/' + nType + '?gettexb');
+         ret.push('https://card.ganbaru.by/asset/' + nType + '?gettexb');
       } else {
          ret.push('');
       }

@@ -9,7 +9,7 @@ app.use(cors({
 
 app.get('/niconi-endpoint', (req, res) => {
   const { cardid } = req.query
-  const url = 'https://card.niconi.co.ni/cardApi/' + cardid;
+  const url = 'https://card.ganbaru.by/cardApi/' + cardid;
   request(url, (error, response, body) => {
     if (!error && response.statusCode === 200) {
       res.setHeader('Content-Type', 'application/json');
